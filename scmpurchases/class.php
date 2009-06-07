@@ -76,7 +76,7 @@ class BK_SCMPurchases extends Pepper {
 		$preferences['System Folder Path'] = <<<HERE
 <table>
 	<tr>
-		<td><label>Enter the path to your System folder so that Mint can connect to your ExpressionEngine database.</label></td>
+		<td><label>Enter the path to your System folder so that Mint can connect to ExpressionEngine’s database.</label></td>
 	</tr>
 	<tr>
 		<td><span><input id="systemFolderPath" name="systemFolderPath" type="text" value="{$this->prefs['systemFolderPath']}"/></span></td>

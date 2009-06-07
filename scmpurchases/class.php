@@ -120,14 +120,14 @@ HERE;
 		{
 			return 'Your System folder couldn’t be found. Make sure your System Folder Path preference is correct.';
 		}
-		$this->conf = $conf;
+		$this->eeConf = $conf;
 
 		// create a new db connection
-		if (($this->conn = mysql_connect($this->conf['db_hostname'], $this->conf['db_username'], $this->conf['db_password'], TRUE)) === FALSE)
+		if (($this->conn = mysql_connect($this->eeConf['db_hostname'], $this->eeConf['db_username'], $this->eeConf['db_password'], TRUE)) === FALSE)
 		{
 			return 'Could not connect to ExpressionEngine’s database.';
 		}
-		if (mysql_select_db($this->conf['db_name'], $this->conn) === FALSE)
+		if (mysql_select_db($this->eeConf['db_name'], $this->conn) === FALSE)
 		{
 			mysql_close($this->conn);
 			return 'Could not connect to ExpressionEngine’s database.';
@@ -138,7 +138,7 @@ HERE;
 			'All' => 0
 		);
 		$query = mysql_query('SELECT sci.item_id, wt.title'
-		                      . ' FROM '.$this->conf['db_prefix'].'_simple_commerce_items sci, '.$this->conf['db_prefix'].'_weblog_titles wt'
+		                      . ' FROM '.$this->eeConf['db_prefix'].'_simple_commerce_items sci, '.$this->eeConf['db_prefix'].'_weblog_titles wt'
 		                      . ' WHERE sci.entry_id = wt.entry_id',
 		                     $this->conn);
 		while($row = mysql_fetch_assoc($query))
@@ -173,7 +173,7 @@ HERE;
 
 		$timestamp2 = $timestamp + $gap;
 
-		$query = mysql_query('SELECT COUNT(*) FROM '.$this->conf['db_prefix'].'_simple_commerce_purchases'
+		$query = mysql_query('SELECT COUNT(*) FROM '.$this->eeConf['db_prefix'].'_simple_commerce_purchases'
 		                      . ' WHERE purchase_date >= '.$timestamp
 		                      . ($gap ? ' AND purchase_date < '.$timestamp2 : '')
 		                      . ($this->filter ? ' AND item_id = '.$this->filter : '')

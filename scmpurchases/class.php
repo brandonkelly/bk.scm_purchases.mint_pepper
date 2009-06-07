@@ -138,8 +138,9 @@ HERE;
 			'All' => 0
 		);
 		$query = mysql_query('SELECT sci.item_id, wt.title'
-		                     . ' FROM '.$this->conf['db_prefix'].'_simple_commerce_items sci, '.$this->conf['db_prefix'].'_weblog_titles wt'
-		                     . ' WHERE sci.entry_id = wt.entry_id');
+		                      . ' FROM '.$this->conf['db_prefix'].'_simple_commerce_items sci, '.$this->conf['db_prefix'].'_weblog_titles wt'
+		                      . ' WHERE sci.entry_id = wt.entry_id',
+		                     $this->conn);
 		while($row = mysql_fetch_assoc($query))
 		{
 			$filters[$row['title']] = $row['item_id'];
@@ -173,11 +174,11 @@ HERE;
 		$timestamp2 = $timestamp + $gap;
 
 		$query = mysql_query('SELECT COUNT(*) FROM '.$this->conf['db_prefix'].'_simple_commerce_purchases'
-		                     . ' WHERE purchase_date >= '.$timestamp
-		                     . ($gap ? ' AND purchase_date < '.$timestamp2 : '')
-		                     . ($this->filter ? ' AND item_id = '.$this->filter : '')
-		                     . ' AND item_cost != "0.00"',
-		                    $this->conn);
+		                      . ' WHERE purchase_date >= '.$timestamp
+		                      . ($gap ? ' AND purchase_date < '.$timestamp2 : '')
+		                      . ($this->filter ? ' AND item_id = '.$this->filter : '')
+		                      . ' AND item_cost != "0.00"',
+		                     $this->conn);
 		return mysql_result($query, 0);
 	}
 

@@ -210,8 +210,7 @@ HERE;
 			$twentyFour = $this->Mint->offsetDate('G', $timestamp) == 0;
 			$hourLabel = $this->Mint->offsetDate('g', $timestamp);
 
-			$graphData['bars'][] = array
-			(
+			$graphData['bars'][] = array(
 				$count,
 				0,
 				($twelve) ? 'Noon' : (($twentyFour) ? 'Midnight' : (($hourLabel == 3 || $hourLabel == 6 || $hourLabel == 9) ? $hourLabel : '')),
@@ -229,8 +228,7 @@ HERE;
 	 */
 	function getHTML_PurchasesWeek() 
 	{
-		$graphData = array
-		(
+		$graphData = array(
 			'titles' => array(
 				'background' => 'Purchases'
 			),
@@ -252,8 +250,7 @@ HERE;
 			$dayOfWeek = $this->Mint->offsetDate('w', $timestamp);
 			$dayLabel = substr($this->Mint->offsetDate('D', $timestamp), 0, 2);
 
-			$graphData['bars'][] = array
-			(
+			$graphData['bars'][] = array(
 				$count,
 				0,
 				($dayOfWeek == 0) ? '' : (($dayOfWeek == 6) ? 'Weekend' : $dayLabel),
@@ -271,8 +268,7 @@ HERE;
 	 */
 	function getHTML_PurchasesMonth() 
 	{
-		$graphData = array
-		(
+		$graphData = array(
 			'titles' => array (
 				'background' => 'Purchases'
 			),
@@ -292,8 +288,7 @@ HERE;
 
 			if ($count > $high) $high = $count;
 
-			$graphData['bars'][] = array
-			(
+			$graphData['bars'][] = array(
 				$count,
 				0,
 				$this->Mint->formatDateRelative($timestamp, "week", $i),
@@ -311,8 +306,7 @@ HERE;
 	 */
 	function getHTML_PurchasesYear() 
 	{
-		$graphData = array
-		(
+		$graphData = array(
 			'titles' => array (
 				'background' => 'Purchases'
 			),
@@ -342,8 +336,7 @@ HERE;
 
 			if ($count > $high) $high = $count;
 
-			$graphData['bars'][] = array
-			(
+			$graphData['bars'][] = array(
 				$count,
 				0,
 				($i == 0) ? 'This Month' : $this->Mint->offsetDate(' M', $timestamp),

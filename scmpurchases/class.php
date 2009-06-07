@@ -134,18 +134,21 @@ HERE;
 		}
 
 		// add item filters
-		$filters = array(
-			'All' => 0
-		);
-		$query = mysql_query('SELECT sci.item_id, wt.title'
+		$items = mysql_query('SELECT sci.item_id, wt.title'
 		                      . ' FROM '.$this->eeConf['db_prefix'].'_simple_commerce_items sci, '.$this->eeConf['db_prefix'].'_weblog_titles wt'
 		                      . ' WHERE sci.entry_id = wt.entry_id',
 		                     $this->conn);
-		while($row = mysql_fetch_assoc($query))
+		if (mysql_num_rows($items) > 1)
 		{
-			$filters[$row['title']] = $row['item_id'];
+			$filters = array(
+				'All' => 0
+			);
+			while($item = mysql_fetch_assoc($items))
+			{
+				$filters[$item['title']] = $item['item_id'];
+			}
+			$html .= $this->generateFilterList($tab, $filters, $this->panes['Purchases']);
 		}
-		$html .= $this->generateFilterList($tab, $filters, $this->panes['Purchases']);
 
 		switch($pane)
 		{
@@ -173,13 +176,13 @@ HERE;
 
 		$timestamp2 = $timestamp + $gap;
 
-		$query = mysql_query('SELECT COUNT(*) FROM '.$this->eeConf['db_prefix'].'_simple_commerce_purchases'
+		$count = mysql_query('SELECT COUNT(*) FROM '.$this->eeConf['db_prefix'].'_simple_commerce_purchases'
 		                      . ' WHERE purchase_date >= '.$timestamp
 		                      . ($gap ? ' AND purchase_date < '.$timestamp2 : '')
 		                      . ($this->filter ? ' AND item_id = '.$this->filter : '')
 		                      . ' AND item_cost != "0.00"',
 		                     $this->conn);
-		return mysql_result($query, 0);
+		return mysql_result($count, 0);
 	}
 
 	/**

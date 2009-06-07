@@ -1,0 +1,20 @@
+===========================================================================
+PEPPER MAKES MINT BETTER
+
+Installing SCM Purchases Pepper
+---------------------------------------------------------------------------
+
+1. Upload the /scmpurchases/ directory and its contents to 
+   /mint/pepper/brandonkelly/. If the directory /brandonkelly/ doesn't
+   exist, create it.
+
+3. Login to your Mint installation and in the Preferences click "Install"
+   under Pepper.
+
+4. Click the SCM Purchases Pepper "Install" button. Click "Okay."
+
+5. Make sure your System Folder Path preference is accurate.
+
+===========================================================================
+Copyright 2009 Brandon Kelly. This package cannot be redistributed without
+permission from http://brandon-kelly.com/
